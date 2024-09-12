@@ -1,0 +1,35 @@
+---
+# yamllint disable rule:line-length
+name: view available compilers
+
+# yamllint disable-line rule:truthy
+on:
+  workflow_call:
+  workflow_dispatch:
+
+concurrency:
+  group: test-${{github.ref}}-${{github.event.pull_request.number || github.run_number}}
+  cancel-in-progress: true
+
+jobs:
+  run-bamboo:
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - macos-14
+          - ubuntu-24.04
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: install system-level dependencies (macOS)
+        run: |
+          brew upgrade
+        if: matrix.os == 'macos-14'
+      - name: install system-level dependencies (Ubuntu)
+        run: |
+          export DEBIAN_FRONTEND=noninteractive
+          sudo apt-get -y update
+          sudo apt-get -y upgrade
+        if: matrix.os == 'ubuntu-24.04'
+# yamllint enable rule:line-length
