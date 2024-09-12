@@ -35,7 +35,7 @@ jobs:
       - name: check compilers
         run: |
           set -x
-          cleaned_path="$(echo "$PATH" | tr ':' '\n')"
+          _cleaned_path="$(echo "$PATH" | tr ':' '\n')"
           print_version() {
               if [[ -f "${1}" ]]; then
                   "${1}" --version
