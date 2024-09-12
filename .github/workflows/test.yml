@@ -22,16 +22,12 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
-      - name: install system-level dependencies (macOS)
-        run: |
-          brew upgrade
-        if: matrix.os == 'macos-14'
-      - name: install system-level dependencies (Ubuntu)
-        run: |
-          export DEBIAN_FRONTEND=noninteractive
-          sudo apt-get -y update
-          sudo apt-get -y upgrade
-        if: matrix.os == 'ubuntu-24.04'
+      - name: ccache
+        uses: hendrikmuhs/ccache-action@v1.2
+        with:
+          create-symlink: true
+          key: ${{ matrix.os }}-${{ matrix.build-type }}
+          verbose: 2
       - name: check compilers
         run: |
           set -x
