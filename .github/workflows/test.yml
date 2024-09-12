@@ -35,7 +35,16 @@ jobs:
       - name: check compilers
         run: |
           set -x
-          echo "$PATH" | tr ':' '\n'
+          cleaned_path="$(echo "$PATH" | tr ':' '\n')"
+          echo "${cleaned_path}"
+          print_version() {
+              if [[ -f "${1}" ]]; then
+                  "${1}" --version
+              fi
+          }
+
           which -a gcc
+          print_version /usr/bin/gcc
           which -a clang
+          print_version /usr/bin/clang
 # yamllint enable rule:line-length
