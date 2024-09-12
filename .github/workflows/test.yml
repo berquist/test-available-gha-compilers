@@ -32,4 +32,10 @@ jobs:
           sudo apt-get -y update
           sudo apt-get -y upgrade
         if: matrix.os == 'ubuntu-24.04'
+      - name: check compilers
+        run: |
+          set -x
+          echo "$PATH" | tr ':' '\n'
+          which -a gcc
+          which -a clang
 # yamllint enable rule:line-length
