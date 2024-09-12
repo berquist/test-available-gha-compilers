@@ -36,7 +36,6 @@ jobs:
         run: |
           set -x
           cleaned_path="$(echo "$PATH" | tr ':' '\n')"
-          echo "${cleaned_path}"
           print_version() {
               if [[ -f "${1}" ]]; then
                   "${1}" --version
@@ -45,6 +44,8 @@ jobs:
 
           which -a gcc
           print_version /usr/bin/gcc
+          print_version /usr/local/bin/gcc
           which -a clang
           print_version /usr/bin/clang
+          print_version /usr/local/bin/gcc
 # yamllint enable rule:line-length
