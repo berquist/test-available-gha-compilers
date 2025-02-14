@@ -26,7 +26,7 @@ jobs:
         uses: hendrikmuhs/ccache-action@ed74d11c0b343532753ecead8a951bb09bb34bc9 # v1.2
         with:
           create-symlink: true
-          key: ${{ matrix.os }}-${{ matrix.build-type }}
+          key: ${{ matrix.os }}
           verbose: 2
       - name: check compilers
         run: |
