@@ -47,5 +47,5 @@ jobs:
           print_version /usr/local/bin/gcc
           which -a clang
           print_version /usr/bin/clang
-          print_version /usr/local/bin/gcc
+          print_version /usr/local/bin/clang
 # yamllint enable rule:line-length
