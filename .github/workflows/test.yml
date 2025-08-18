@@ -1,6 +1,6 @@
 ---
 # yamllint disable rule:line-length
-name: view available compilers
+name: View available compilers
 
 # yamllint disable-line rule:truthy
 on:
@@ -15,6 +15,7 @@ permissions: {}
 
 jobs:
   run-bamboo:
+    name: View available compilers with ccache
     strategy:
       fail-fast: false
       matrix:
@@ -23,7 +24,8 @@ jobs:
           - ubuntu-24.04
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+      - name: Clone this repo
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
         with:
           persist-credentials: false
       - name: ccache
@@ -32,7 +34,7 @@ jobs:
           create-symlink: true
           key: ${{ matrix.os }}
           verbose: 2
-      - name: check compilers
+      - name: Check compilers
         run: |
           set -x
           _cleaned_path="$(echo "$PATH" | tr ':' '\n')"
