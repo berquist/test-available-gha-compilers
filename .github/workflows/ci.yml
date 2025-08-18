@@ -1,5 +1,5 @@
 ---
-name: ci
+name: Continuous integration
 
 # yamllint disable-line rule:truthy
 on:
@@ -17,6 +17,7 @@ jobs:
   separate-zizmor:
     uses: ./.github/workflows/zizmor.yml
   all-prechecks:
+    name: All pre-test checks
     needs: [prechecks, separate-zizmor]
     runs-on: ubuntu-latest
     steps:
@@ -26,6 +27,7 @@ jobs:
     needs: [all-prechecks]
     uses: ./.github/workflows/test.yml
   all:
+    name: All tests
     needs: [tests]
     runs-on: ubuntu-latest
     steps:
